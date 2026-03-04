@@ -1,0 +1,47 @@
+version: "3"
+
+vars:
+  APP_PATH: ./
+
+tasks:
+  default:
+    cmds:
+      - task -l
+    silent: true
+
+  web-start: 
+    desc: Start web server
+    dir: "{{.APP_PATH}}"
+    cmds:
+      - fastapi dev src/server.py --reload
+  
+  tailwindx64:
+    desc: Start Tailwind CSS watcher
+    dir: "{{.APP_PATH}}"
+    cmds:
+      - ./tailwindcss -i src/web/static/css/builder/tailwindcss-in.css -o src/web/static/css/tailwind.css --watch --minify 
+
+  upgrade:
+    desc: Upgrade packages
+    dir: "{{.APP_PATH}}"
+    cmds:
+      - uv lock --upgrade
+    #silent: true
+
+  freeze:
+    desc: Freeze packages
+    dir: "{{.APP_PATH}}"
+    cmds:
+      - uv lock
+
+  sync-dev:
+    desc: Sync Dev
+    dir: "{{.APP_PATH}}"
+    cmds:
+      - uv sync --dev --frozen --link-mode=copy --no-editable --no-install-project
+
+  sync-prod:
+    desc: Sync Prod
+    dir: "{{.APP_PATH}}"
+    cmds:
+      - uv sync --frozen --link-mode=copy --no-editable --no-install-project

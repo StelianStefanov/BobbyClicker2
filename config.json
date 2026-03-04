@@ -1,0 +1,7 @@
+{
+    "time_delay": 1.0,
+    "start_keybind": "z",
+    "stop_keybind": "x",
+    "click_button": "left",
+    "appearance_mode": "system"
+}
