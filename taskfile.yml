@@ -9,18 +9,6 @@ tasks:
       - task -l
     silent: true
 
-  web-start: 
-    desc: Start web server
-    dir: "{{.APP_PATH}}"
-    cmds:
-      - fastapi dev src/server.py --reload
-  
-  tailwindx64:
-    desc: Start Tailwind CSS watcher
-    dir: "{{.APP_PATH}}"
-    cmds:
-      - ./tailwindcss -i src/web/static/css/builder/tailwindcss-in.css -o src/web/static/css/tailwind.css --watch --minify 
-
   upgrade:
     desc: Upgrade packages
     dir: "{{.APP_PATH}}"
